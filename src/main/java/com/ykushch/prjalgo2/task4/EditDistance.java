@@ -31,4 +31,31 @@ public class EditDistance {
 
         return 1 + Collections.min(Arrays.asList(insertOperationCounter, removeOperationCounter, replaceOperationCounter));
     }
+
+    public static String findLongestCommonSequence(String src, String dest) {
+        int srcLen = src.length();
+        int destLen = dest.length();
+
+        if (srcLen == 0 || destLen == 0) {
+            return "";
+        }
+
+        char srcLastChar = src.charAt(srcLen - 1);
+        char destLastChar = dest.charAt(destLen - 1);
+
+        if (areLastCharsEqual(srcLastChar, destLastChar)) {
+            return findLongestCommonSequence(src.substring(0, srcLen - 1), dest.substring(0, destLen - 1)) + src.charAt(srcLen - 1);
+        } else {
+            String x = findLongestCommonSequence(src, dest.substring(0, destLen - 1));
+            String y = findLongestCommonSequence(src.substring(0, srcLen - 1), dest);
+
+            return x.length() > y.length()
+                    ? x
+                    : y;
+        }
+    }
+
+    private static boolean areLastCharsEqual(char srcLastChar, char destLastChar) {
+        return srcLastChar == destLastChar;
+    }
 }

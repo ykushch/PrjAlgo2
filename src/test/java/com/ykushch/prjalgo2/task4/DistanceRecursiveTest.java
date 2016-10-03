@@ -4,14 +4,14 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class EditDistanceTest {
+public class DistanceRecursiveTest {
 
     @Test
     public void shouldReturnCorrectSequenceWhenValidInputPassed() throws Exception {
         String inputA = "horizon";
         String inputB = "horizontal";
 
-        int result = EditDistance.computeRecursively(inputA, inputB);
+        int result = DistanceRecursive.computeEditDistance(inputA, inputB);
 
         assertThat(result).isEqualTo(3);
     }
@@ -22,7 +22,7 @@ public class EditDistanceTest {
         String inputB = "fyord";
         String expected = "ord";
 
-        String result = EditDistance.findLongestCommonSequence(inputA, inputB);
+        String result = DistanceRecursive.findLongestCommonSequence(inputA, inputB);
 
         assertThat(result).isEqualTo(expected);
     }

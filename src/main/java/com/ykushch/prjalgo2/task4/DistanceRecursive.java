@@ -3,8 +3,8 @@ package com.ykushch.prjalgo2.task4;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class EditDistance {
-    public static int computeRecursively(String srcString, String destString) {
+public class DistanceRecursive {
+    public static int computeEditDistance(String srcString, String destString) {
         int srcStrLen = srcString.length();
         int destStrLen = destString.length();
 
@@ -22,12 +22,12 @@ public class EditDistance {
         char destCharEnd = destString.charAt(destStrLen - 1);
 
         if (srcCharEnd == destCharEnd) {
-            return computeRecursively(srcString.substring(0, srcStrLen - 1), destString.substring(0, destStrLen - 1));
+            return computeEditDistance(srcString.substring(0, srcStrLen - 1), destString.substring(0, destStrLen - 1));
         }
 
-        int insertOperationCounter = computeRecursively(srcString, destString.substring(0, destStrLen - 1));
-        int removeOperationCounter = computeRecursively(srcString.substring(0, srcStrLen - 1), destString);
-        int replaceOperationCounter = computeRecursively(srcString.substring(0, srcStrLen - 1), destString.substring(0, destStrLen - 1));
+        int insertOperationCounter = computeEditDistance(srcString, destString.substring(0, destStrLen - 1));
+        int removeOperationCounter = computeEditDistance(srcString.substring(0, srcStrLen - 1), destString);
+        int replaceOperationCounter = computeEditDistance(srcString.substring(0, srcStrLen - 1), destString.substring(0, destStrLen - 1));
 
         return 1 + Collections.min(Arrays.asList(insertOperationCounter, removeOperationCounter, replaceOperationCounter));
     }

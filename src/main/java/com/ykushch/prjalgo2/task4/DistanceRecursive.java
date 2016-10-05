@@ -25,11 +25,11 @@ public class DistanceRecursive {
             return computeEditDistance(srcString.substring(0, srcStrLen - 1), destString.substring(0, destStrLen - 1));
         }
 
-        int insertOperationCounter = computeEditDistance(srcString, destString.substring(0, destStrLen - 1));
-        int removeOperationCounter = computeEditDistance(srcString.substring(0, srcStrLen - 1), destString);
-        int replaceOperationCounter = computeEditDistance(srcString.substring(0, srcStrLen - 1), destString.substring(0, destStrLen - 1));
+        int insertCnt = computeEditDistance(srcString, destString.substring(0, destStrLen - 1));
+        int removeCnt = computeEditDistance(srcString.substring(0, srcStrLen - 1), destString);
+        int replaceCnt = computeEditDistance(srcString.substring(0, srcStrLen - 1), destString.substring(0, destStrLen - 1));
 
-        return 1 + Collections.min(Arrays.asList(insertOperationCounter, removeOperationCounter, replaceOperationCounter));
+        return 1 + Collections.min(Arrays.asList(insertCnt, removeCnt, replaceCnt));
     }
 
     public static String findLongestCommonSequence(String src, String dest) {
@@ -44,7 +44,8 @@ public class DistanceRecursive {
         char destLastChar = dest.charAt(destLen - 1);
 
         if (areLastCharsEqual(srcLastChar, destLastChar)) {
-            return findLongestCommonSequence(src.substring(0, srcLen - 1), dest.substring(0, destLen - 1)) + src.charAt(srcLen - 1);
+            return findLongestCommonSequence(src.substring(0, srcLen - 1),
+                    dest.substring(0, destLen - 1)) + src.charAt(srcLen - 1);
         } else {
             String x = findLongestCommonSequence(src, dest.substring(0, destLen - 1));
             String y = findLongestCommonSequence(src.substring(0, srcLen - 1), dest);

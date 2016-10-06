@@ -14,9 +14,7 @@ public class WordBreakTest {
     public void shouldBreakSentenceIntoWordsWhenValidInputSent() throws Exception {
         WordBreak wordBreak = new WordBreak();
         Set<String> dict = Stream.of("greedy", "this", "is", "name", "code", "test", "a").collect(toSet());
-
         String sentence = wordBreak.breakWord("thisisatest", dict);
-
         assertThat(sentence).isEqualTo("this is a test");
     }
 
@@ -24,10 +22,7 @@ public class WordBreakTest {
     public void shouldBreakSentenceRecursivelyIntoWordsWhenValidInputSent() throws Exception {
         WordBreak wordBreak = new WordBreak();
         Set<String> dict = Stream.of("greedy", "this", "is", "name", "code", "test", "a").collect(toSet());
-
         String sentence = wordBreak.breakWordRecursively("thisisatest", dict);
-
         assertThat(sentence).isEqualTo("this is a test");
     }
-
 }

@@ -9,6 +9,12 @@ import static java.util.stream.Collectors.joining;
 
 public class WordBreak {
 
+    /**
+     * Breaks words using naive approach (plain recursion)
+     * @param s sentence without spaces
+     * @param dict dictionary with unique words
+     * @return sentence with spaces based on dictionary
+     */
     public String breakWordRecursively(String s, Set<String> dict) {
         List<String> resultList = new ArrayList<>();
         if (!couldBreakSentenceRecursively(s, dict, 0, resultList)) {
@@ -42,6 +48,12 @@ public class WordBreak {
         return false;
     }
 
+    /**
+     * Breaks words using dynamic programming approach
+     * @param s sentence without spaces
+     * @param dict dictionary with unique words
+     * @return sentence with spaces based on dictionary
+     */
     public String breakWord(String s, Set<String> dict) {
         List<String> result = breakDownSentence(s, dict);
 

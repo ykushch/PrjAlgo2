@@ -8,18 +8,18 @@ import java.util.Set;
 import static java.util.stream.Collectors.joining;
 
 public class WordBreak {
-    public List<String> finalRes = new ArrayList<>();
 
-    public String breakWord(String s, Set<String> dict) {
-        if (!couldBreakSentence(s, dict, 0)) {
+    public String breakWordRecursively(String s, Set<String> dict) {
+        List<String> resultList = new ArrayList<>();
+        if (!couldBreakSentenceRecursively(s, dict, 0, resultList)) {
             return "";
         }
-        Collections.reverse(finalRes);
-        return finalRes.stream()
+        Collections.reverse(resultList);
+        return resultList.stream()
                 .collect(joining(" "));
     }
 
-    private boolean couldBreakSentence(String s, Set<String> dict, int start) {
+    private boolean couldBreakSentenceRecursively(String s, Set<String> dict, int start, List<String> resultList) {
         if(start == s.length()) {
             return true;
         }
@@ -32,13 +32,51 @@ public class WordBreak {
                 continue;
             }
 
-            if(s.substring(start, start + len).equals(a)) {
-                if(couldBreakSentence(s, dict, start + len)) {
-                    finalRes.add(s.substring(start, start + len));
+            if(s.substring(start, end).equals(a)) {
+                if(couldBreakSentenceRecursively(s, dict, start + len, resultList)) {
+                    resultList.add(s.substring(start, start + len));
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    public String breakWord(String s, Set<String> dict) {
+        List<String> result = breakDownSentence(s, dict);
+
+        if (result.isEmpty()) {
+            return "";
+        }
+        return result.stream()
+                .collect(joining(" "));
+    }
+
+    private List<String> breakDownSentence(String sentence, Set<String> dict) {
+        List<String> resultBreakDownList = new ArrayList<>();
+        boolean[] result = new boolean[sentence.length() + 1];
+        result[0] = true;
+
+        for (int i = 0; i < sentence.length(); i++) {
+            if(!result[i]) {
+                continue;
+            }
+
+            for (String wordFromDict : dict) {
+                int len = wordFromDict.length();
+                int end = i + len;
+
+                if(end > sentence.length() || result[end]) {
+                    continue;
+                }
+
+                if(sentence.substring(i, end).equals(wordFromDict)) {
+                    resultBreakDownList.add(wordFromDict);
+                    result[end] = true;
+                }
+            }
+        }
+
+        return resultBreakDownList;
     }
 }

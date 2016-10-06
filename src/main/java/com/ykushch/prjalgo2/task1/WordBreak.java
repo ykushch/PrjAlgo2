@@ -11,36 +11,34 @@ public class WordBreak {
 
     /**
      * Breaks words using naive approach (plain recursion)
-     * @param s sentence without spaces
+     * @param sentence sentence without spaces
      * @param dict dictionary with unique words
      * @return sentence with spaces based on dictionary
      */
-    public String breakWordRecursively(String s, Set<String> dict) {
+    public String breakWordRecursively(String sentence, Set<String> dict) {
         List<String> resultList = new ArrayList<>();
-        if (!couldBreakSentenceRecursively(s, dict, 0, resultList)) {
-            return "";
-        }
+        couldBreakSentenceRecursively(sentence, dict, 0, resultList);
         Collections.reverse(resultList);
         return resultList.stream()
                 .collect(joining(" "));
     }
 
-    private boolean couldBreakSentenceRecursively(String s, Set<String> dict, int start, List<String> resultList) {
-        if(start == s.length()) {
+    private boolean couldBreakSentenceRecursively(String sentence, Set<String> dict, int start,
+                                                  List<String> resultList) {
+        if(start == sentence.length()) {
             return true;
         }
-
-        for(String a: dict) {
-            int len = a.length();
+        for(String word: dict) {
+            int len = word.length();
             int end = start + len;
-
-            if(end > s.length()) {
+            if(end > sentence.length()) {
                 continue;
             }
 
-            if(s.substring(start, end).equals(a)) {
-                if(couldBreakSentenceRecursively(s, dict, start + len, resultList)) {
-                    resultList.add(s.substring(start, start + len));
+            String extractedWord = sentence.substring(start, end);
+            if(extractedWord.equals(word)) {
+                if(couldBreakSentenceRecursively(sentence, dict, start + len, resultList)) {
+                    resultList.add(sentence.substring(start, start + len));
                     return true;
                 }
             }
@@ -56,10 +54,6 @@ public class WordBreak {
      */
     public String breakWord(String s, Set<String> dict) {
         List<String> result = breakDownSentence(s, dict);
-
-        if (result.isEmpty()) {
-            return "";
-        }
         return result.stream()
                 .collect(joining(" "));
     }
@@ -82,7 +76,8 @@ public class WordBreak {
                     continue;
                 }
 
-                if(sentence.substring(i, end).equals(wordFromDict)) {
+                String extractedWord = sentence.substring(i, end);
+                if(extractedWord.equals(wordFromDict)) {
                     resultBreakDownList.add(wordFromDict);
                     result[end] = true;
                 }

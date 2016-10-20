@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class EditDistanceTest {
     @Test
-    public void computeMinEditDistance() throws Exception {
+    public void shouldComputeMinEditDistanceWhenCorrectArgsPassed() throws Exception {
         String src = "world";
         String dest = "aafdfyord";
         int result = EditDistance.computeMinEditDistance(src, dest, true);

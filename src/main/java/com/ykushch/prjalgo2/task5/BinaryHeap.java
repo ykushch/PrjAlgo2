@@ -9,7 +9,6 @@ import static java.util.stream.Collectors.*;
 public class BinaryHeap {
     private List<Integer> list = new ArrayList<>();
 
-    
     public int getHeapSize() {
         return list.size();
     }

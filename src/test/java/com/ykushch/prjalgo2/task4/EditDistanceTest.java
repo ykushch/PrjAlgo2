@@ -3,15 +3,14 @@ package com.ykushch.prjalgo2.task4;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 
 public class EditDistanceTest {
     @Test
     public void computeMinEditDistance() throws Exception {
         String src = "world";
-        String dest = "fyord";
+        String dest = "aafdfyord";
         int result = EditDistance.computeMinEditDistance(src, dest, true);
-        assertThat(result).isEqualTo(3);
+        assertThat(result).isEqualTo(7);
     }
 
 }

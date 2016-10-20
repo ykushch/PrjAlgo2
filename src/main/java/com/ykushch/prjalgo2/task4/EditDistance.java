@@ -46,6 +46,11 @@ public class EditDistance {
 
         while (true) {
             if (i == 0 || j == 0) {
+                if(j > 0) {
+                    log.info(String.format("Insert letter1 %s", str2[j - 1]));
+                    j--;
+                    continue;
+                }
                 break;
             }
 
@@ -53,14 +58,14 @@ public class EditDistance {
                 i--;
                 j--;
             } else if (arr[i][j] == arr[i - 1][j - 1] + 1) {
-                log.info(String.format("Edit %s in string2 to %s in string1", str2[j - 1], str1[i - 1]));
+                log.info(String.format("Change letter %s to %s", str1[i - 1], str2[j - 1]));
                 i--;
                 j--;
             } else if (arr[i][j] == arr[i - 1][j] + 1) {
-                log.info(String.format("Delete in string1: %s", str1[i - 1]));
+                log.info(String.format("Delete letter in string1: %s", str1[i - 1]));
                 i--;
             } else if (arr[i][j] == arr[i][j - 1] + 1) {
-                log.info(String.format("Delete in string2: %s", str2[j - 1]));
+                log.info(String.format("Insert letter in string1: %s", str2[j - 1]));
                 j--;
             } else {
                 throw new IllegalArgumentException("Invalid data was obtained. Nothing to produce.");

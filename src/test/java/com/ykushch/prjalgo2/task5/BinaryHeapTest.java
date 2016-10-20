@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 public class BinaryHeapTest {
+
     @Test
     public void shouldCorrectlyBuildBinaryHeapMaxWhenUnorderedArrayIsPassed() throws Exception {
         BinaryHeap binaryHeap = new BinaryHeap();
@@ -12,5 +13,4 @@ public class BinaryHeapTest {
         binaryHeap.buildHeap(unsortedArray);
         Assertions.assertThat(binaryHeap.getBinaryHeap()).isEqualTo(expected);
     }
-
 }

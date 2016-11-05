@@ -109,7 +109,6 @@ public class WordBreak {
             return false;
         }
 
-
         if(memoList.contains(sentence)) {
             return false;
         }
@@ -117,9 +116,11 @@ public class WordBreak {
         String word = "";
         for(int i = 0; i < sentence.length(); i++) {
             word += sentence.charAt(i);
+
             if(dict.contains(word)) {
                 resultList.add(word);
                 String restPart = sentence.substring(i + 1);
+
                 if(isSentenceBrokenIntoWords(restPart, dict, resultList, memoList)) {
                     return true;
                 }
